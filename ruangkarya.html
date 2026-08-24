@@ -1,0 +1,614 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RuangKarya — Renovasi, Bangunan & Interior</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Newsreader:ital@1&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --stone:#f5f1e9;
+  --card:#fffefb;
+  --ink:#211f1b;
+  --ink-dim:#6f6a60;
+  --forest:#2f5d50;
+  --forest-soft:#e2e8e0;
+  --clay:#b5693f;
+  --line:#e2dbcb;
+  --blue:#3b5a7a;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--stone);color:var(--ink);font-family:'Inter',Arial,sans-serif;line-height:1.55}
+a{text-decoration:none;color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+h1,h2,h3{font-family:'Space Grotesk',Arial,sans-serif;margin:0}
+.serif{font-family:'Newsreader',Georgia,serif;font-style:italic}
+.mono{font-family:'JetBrains Mono',monospace}
+
+/* nav */
+nav{display:flex;justify-content:space-between;align-items:center;padding:24px 0;border-bottom:1px solid var(--line)}
+.logo{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:20px;letter-spacing:.04em;display:flex;align-items:center;gap:8px}
+.logo .sq{width:9px;height:9px;background:var(--forest);display:inline-block}
+.nav-right{display:flex;align-items:center;gap:16px}
+.nav-links{display:flex;gap:22px;font-size:13.5px;font-weight:500;color:var(--ink-dim)}
+.nav-links a:hover{color:var(--ink)}
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--forest);color:#fff;padding:12px 22px;border-radius:8px;font-weight:600;font-size:14px;white-space:nowrap;transition:transform .15s ease,background .15s ease}
+.btn:hover{transform:translateY(-2px);background:#264d42}
+.btn.ghost{background:transparent;border:1.5px solid var(--ink);color:var(--ink)}
+.btn.ghost:hover{background:var(--ink);color:var(--stone)}
+.btn:focus-visible,a:focus-visible{outline:2px solid var(--forest);outline-offset:3px}
+
+/* hero */
+.hero{padding:60px 0 0;position:relative;overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:center;padding-bottom:44px}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--forest)}
+.eyebrow::before{content:"";width:8px;height:8px;background:var(--forest)}
+.hero h1{font-size:clamp(38px,5vw,58px);line-height:1.04;letter-spacing:-.01em;margin:16px 0 20px;max-width:620px}
+.hero h1 .serif{color:var(--forest);font-size:1.02em}
+.hero p{max-width:480px;color:var(--ink-dim);font-size:16px;margin-bottom:28px}
+.cta-row{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:34px}
+.stat-row{display:flex;gap:36px;flex-wrap:wrap}
+.stat b{display:block;font-family:'Space Grotesk',sans-serif;font-size:26px;font-weight:700;color:var(--forest)}
+.stat span{font-size:12px;color:var(--ink-dim)}
+
+/* blueprint visual */
+.blueprint{position:relative;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:20px}
+.blueprint svg{width:100%;height:auto;display:block}
+.blueprint .tag{position:absolute;top:16px;right:16px;font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--ink-dim);text-align:right;line-height:1.5}
+.blueprint .tag b{color:var(--forest);display:block;font-size:11px}
+
+.section{padding:74px 0}
+.section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:44px;flex-wrap:wrap}
+.section-head h2{font-size:clamp(28px,3.8vw,40px);letter-spacing:-.005em}
+.section-head p{color:var(--ink-dim);font-size:14.5px;max-width:380px}
+
+/* layanan */
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.svc-card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:26px;transition:transform .18s ease,box-shadow .18s ease}
+.svc-card:hover{transform:translateY(-4px);box-shadow:0 18px 30px -16px rgba(33,31,27,.18)}
+.svc-num{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--forest);margin-bottom:14px}
+.svc-card h3{font-size:19px;margin-bottom:8px}
+.svc-card p{color:var(--ink-dim);font-size:13.5px;margin:0 0 16px}
+.svc-list{list-style:none;padding:0;margin:0;display:grid;gap:6px}
+.svc-list li{font-size:12.5px;color:var(--ink-dim);display:flex;gap:8px;align-items:flex-start}
+.svc-list li::before{content:"—";color:var(--forest);flex:none}
+
+/* proses timeline */
+.timeline{background:var(--ink);color:var(--stone);border-radius:16px;padding:46px 38px}
+.timeline-head{margin-bottom:36px}
+.timeline-head .eyebrow{color:var(--clay)}
+.timeline-head .eyebrow::before{background:var(--clay)}
+.timeline-head h2{color:#fff;margin-top:14px}
+.tl-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:0;position:relative}
+.tl-grid::before{content:"";position:absolute;top:19px;left:0;right:0;height:1px;background:#3d3a34;z-index:0}
+.tl-step{position:relative;z-index:1;padding-right:14px}
+.tl-dot{width:38px;height:38px;border-radius:50%;background:var(--ink);border:2px solid var(--clay);color:var(--clay);font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.tl-step h3{font-size:14.5px;color:#fff;margin-bottom:6px}
+.tl-step p{font-size:12.5px;color:#b8b3a7;margin:0;line-height:1.6}
+
+/* estimator */
+.est-card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:34px;display:grid;grid-template-columns:1.1fr .9fr;gap:34px}
+.est-field{margin-bottom:18px}
+.est-field label{display:block;font-size:12.5px;font-weight:600;margin-bottom:8px;color:var(--ink)}
+.est-field select,.est-field input[type=number]{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:8px;font-family:'Inter',sans-serif;font-size:14px;background:var(--stone);color:var(--ink)}
+.est-radios{display:flex;gap:8px}
+.est-radios label{flex:1;text-align:center;border:1px solid var(--line);border-radius:8px;padding:10px 6px;font-size:12px;font-weight:600;color:var(--ink-dim);cursor:pointer;transition:all .15s ease}
+.est-radios input{display:none}
+.est-radios input:checked + span{color:var(--forest)}
+.est-radios label:has(input:checked){border-color:var(--forest);background:var(--forest-soft)}
+.est-result{background:var(--forest);color:#fff;border-radius:12px;padding:28px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
+.est-result .elabel{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;opacity:.75;margin-bottom:8px}
+.est-result .erange{font-family:'Space Grotesk',sans-serif;font-size:26px;font-weight:700;margin-bottom:6px;line-height:1.2}
+.est-result .enote{font-size:11px;opacity:.7;margin-bottom:18px}
+
+/* before/after */
+.ba-wrap{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:26px}
+.ba-slider{position:relative;aspect-ratio:16/9;border-radius:10px;overflow:hidden;user-select:none}
+.ba-before,.ba-after{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;font-family:'Space Grotesk',sans-serif}
+.ba-before{background:#d8d2c4;color:#7a7466}
+.ba-after{background:linear-gradient(135deg,#2f5d50,#3b5a7a);color:#fff}
+.ba-after{clip-path:inset(0 0 0 50%)}
+.ba-label{position:absolute;top:14px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.06em;padding:5px 10px;border-radius:20px;background:rgba(0,0,0,.35);color:#fff}
+.ba-before .ba-label{left:14px}
+.ba-after .ba-label{right:14px}
+.ba-handle{position:absolute;top:0;bottom:0;left:50%;width:0;pointer-events:none}
+.ba-handle::before{content:"";position:absolute;top:0;bottom:0;left:0;width:2px;background:#fff}
+.ba-handle::after{content:"⇔";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:34px;height:34px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--ink);box-shadow:0 4px 10px rgba(0,0,0,.25)}
+.ba-range{width:100%;margin-top:16px;accent-color:var(--forest)}
+.ba-caption{display:flex;justify-content:space-between;align-items:center;margin-top:16px;flex-wrap:wrap;gap:10px}
+.ba-caption h3{font-size:17px}
+.spec-row{display:flex;gap:18px;flex-wrap:wrap;font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--ink-dim)}
+.spec-row b{color:var(--ink)}
+
+/* proyek grid */
+.proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.proj-card{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;transition:transform .18s ease}
+.proj-card:hover{transform:translateY(-4px)}
+.proj-photo{height:170px;display:flex;align-items:center;justify-content:center;font-size:44px;color:#fff}
+.proj-body{padding:18px}
+.proj-body h3{font-size:16px;margin-bottom:10px}
+.proj-specs{display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:11.5px;color:var(--ink-dim);font-family:'JetBrains Mono',monospace}
+.proj-specs b{color:var(--ink);display:block;font-size:12.5px}
+
+/* kenapa */
+.why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.why-card{padding:4px}
+.why-card svg{width:24px;height:24px;stroke:var(--forest);margin-bottom:14px}
+.why-card h3{font-size:15.5px;margin-bottom:8px}
+.why-card p{color:var(--ink-dim);font-size:13px;margin:0}
+
+/* area layanan */
+.area-chips{display:flex;flex-wrap:wrap;gap:10px}
+.area-chips span{background:var(--card);border:1px solid var(--line);padding:9px 16px;border-radius:20px;font-size:13px;font-weight:500}
+
+/* testimoni */
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.testi-card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:24px}
+.testi-card .stars{color:var(--clay);font-size:13px;letter-spacing:2px;margin-bottom:14px}
+.testi-card p{font-size:14px;color:var(--ink-dim);margin:0 0 16px}
+.testi-who{display:flex;justify-content:space-between;font-size:12.5px;border-top:1px solid var(--line);padding-top:14px}
+.testi-who b{font-weight:600;color:var(--ink)}
+
+/* faq */
+.faq-list{max-width:760px;margin:0 auto;display:grid;gap:12px}
+.faq-item{background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.faq-q{width:100%;text-align:left;background:none;border:none;padding:18px 20px;font-family:'Inter',sans-serif;font-weight:600;font-size:14px;color:var(--ink);display:flex;justify-content:space-between;align-items:center;cursor:pointer;gap:14px}
+.faq-q svg{width:16px;height:16px;stroke:var(--forest);transition:transform .2s ease;flex:none}
+.faq-item.open .faq-q svg{transform:rotate(180deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .25s ease}
+.faq-item.open .faq-a{max-height:200px}
+.faq-a p{padding:0 20px 18px;color:var(--ink-dim);font-size:13.5px;margin:0;line-height:1.65}
+
+/* cta */
+.cta{position:relative;background:var(--forest);color:#fff;border-radius:18px;padding:48px 44px;display:grid;grid-template-columns:1.2fr .8fr;gap:32px;align-items:center}
+.cta h2{font-size:clamp(26px,3.6vw,36px);margin-bottom:12px;color:#fff}
+.cta p{color:#cfe0da;font-size:15px;max-width:440px}
+.cta .btn{background:#fff;color:var(--forest)}
+.cta .btn.ghost{border-color:#cfe0da;color:#fff}
+.cta .btn.ghost:hover{background:#fff;color:var(--forest)}
+.cta-info{display:grid;gap:12px;font-size:13px;color:#cfe0da}
+.cta-info b{color:#fff;display:block;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.05em;text-transform:uppercase;margin-bottom:2px}
+
+footer{padding:34px 0;border-top:1px solid var(--line)}
+.foot-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;font-size:13px;color:var(--ink-dim)}
+.foot-links{display:flex;gap:20px}
+.foot-links a:hover{color:var(--ink)}
+
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease}
+.reveal.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+
+@media(max-width:920px){
+  .hero-grid{grid-template-columns:1fr}
+  .svc-grid{grid-template-columns:1fr 1fr}
+  .tl-grid{grid-template-columns:1fr 1fr;row-gap:26px}
+  .tl-grid::before{display:none}
+  .est-card{grid-template-columns:1fr}
+  .proj-grid{grid-template-columns:1fr 1fr}
+  .why-grid{grid-template-columns:1fr 1fr}
+  .testi-grid{grid-template-columns:1fr}
+  .cta{grid-template-columns:1fr}
+  .nav-links{display:none}
+}
+@media(max-width:600px){
+  .svc-grid{grid-template-columns:1fr}
+  .tl-grid{grid-template-columns:1fr}
+  .proj-grid{grid-template-columns:1fr}
+  .why-grid{grid-template-columns:1fr}
+  .cta{padding:30px 24px}
+  .stat-row{gap:24px}
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+<nav>
+  <a class="logo" href="#top"><span class="sq"></span>RUANGKARYA</a>
+  <div class="nav-right">
+    <div class="nav-links">
+      <a href="#layanan">Layanan</a>
+      <a href="#estimasi">Estimasi Biaya</a>
+      <a href="#proyek">Proyek</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <a class="btn" href="https://wa.me/6281234567890">Konsultasi</a>
+  </div>
+</nav>
+</div>
+
+<section class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div class="reveal">
+      <div class="eyebrow">Renovasi • Bangunan • Interior</div>
+      <h1>Wujudkan ruang yang <span class="serif">nyaman</span> untuk hidup.</h1>
+      <p>Dari renovasi rumah, desain interior, sampai pembangunan baru — kami bantu dari konsep, gambar kerja, sampai serah terima kunci.</p>
+      <div class="cta-row">
+        <a class="btn" href="https://wa.me/6281234567890">Konsultasi Gratis →</a>
+        <a class="btn ghost" href="#estimasi">Cek Estimasi Biaya</a>
+      </div>
+      <div class="stat-row">
+        <div class="stat"><b>120+</b><span>Proyek selesai</span></div>
+        <div class="stat"><b>8 Thn</b><span>Pengalaman</span></div>
+        <div class="stat"><b>4.9/5</b><span>Rating klien</span></div>
+      </div>
+    </div>
+
+    <div class="reveal blueprint">
+      <span class="tag">RK—2026<b>DENAH RUMAH</b></span>
+      <svg viewBox="0 0 400 320" xmlns="http://www.w3.org/2000/svg">
+        <rect x="20" y="20" width="360" height="280" fill="none" stroke="#2f5d50" stroke-width="2"/>
+        <line x1="20" y1="130" x2="230" y2="130" stroke="#2f5d50" stroke-width="1.5"/>
+        <line x1="230" y1="20" x2="230" y2="300" stroke="#2f5d50" stroke-width="1.5"/>
+        <line x1="230" y1="210" x2="380" y2="210" stroke="#2f5d50" stroke-width="1.5"/>
+        <rect x="70" y="60" width="60" height="8" fill="#2f5d50" opacity=".5"/>
+        <rect x="280" y="150" width="8" height="50" fill="#2f5d50" opacity=".5"/>
+        <text x="45" y="80" font-family="JetBrains Mono, monospace" font-size="10" fill="#6f6a60">R. KELUARGA</text>
+        <text x="45" y="185" font-family="JetBrains Mono, monospace" font-size="10" fill="#6f6a60">KAMAR TIDUR</text>
+        <text x="255" y="80" font-family="JetBrains Mono, monospace" font-size="10" fill="#6f6a60">DAPUR</text>
+        <text x="255" y="260" font-family="JetBrains Mono, monospace" font-size="10" fill="#6f6a60">KM. MANDI</text>
+        <g stroke="#b5693f" stroke-width="1">
+          <line x1="20" y1="308" x2="380" y2="308"/>
+          <line x1="20" y1="304" x2="20" y2="312"/>
+          <line x1="380" y1="304" x2="380" y2="312"/>
+        </g>
+        <text x="185" y="318" font-family="JetBrains Mono, monospace" font-size="9" fill="#b5693f">12.0 m</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="layanan">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div><div class="eyebrow" style="margin-bottom:10px">Layanan Kami</div><h2>Tiga layanan inti</h2></div>
+      <p>Bisa dipilih satu-satu atau digabung dari konsep sampai selesai — tinggal sesuaikan kebutuhan dan budget.</p>
+    </div>
+    <div class="svc-grid">
+      <div class="svc-card reveal">
+        <div class="svc-num">01 / RENOVASI</div>
+        <h3>Renovasi Rumah</h3>
+        <p>Perubahan ruang, fasad, dapur, kamar mandi, dan kebutuhan lainnya.</p>
+        <ul class="svc-list">
+          <li>Renovasi sebagian atau total</li>
+          <li>Perbaikan struktur & atap</li>
+          <li>Update fasad & tampilan luar</li>
+        </ul>
+      </div>
+      <div class="svc-card reveal">
+        <div class="svc-num">02 / BANGUN</div>
+        <h3>Pembangunan</h3>
+        <p>Pengerjaan rumah dan bangunan dengan perencanaan yang jelas.</p>
+        <ul class="svc-list">
+          <li>Desain & gambar kerja (IMB siap)</li>
+          <li>Pembangunan dari nol</li>
+          <li>Pengawasan proyek berkala</li>
+        </ul>
+      </div>
+      <div class="svc-card reveal">
+        <div class="svc-num">03 / INTERIOR</div>
+        <h3>Desain Interior</h3>
+        <p>Penataan ruang agar lebih fungsional, rapi, dan sesuai karakter.</p>
+        <ul class="svc-list">
+          <li>Konsep & moodboard interior</li>
+          <li>Furniture custom & built-in</li>
+          <li>Styling & sentuhan akhir</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+    <div class="timeline reveal">
+      <div class="timeline-head">
+        <div class="eyebrow">Alur Kerja</div>
+        <h2>Lima tahap, jelas dari awal.</h2>
+      </div>
+      <div class="tl-grid">
+        <div class="tl-step"><div class="tl-dot">01</div><h3>Konsultasi</h3><p>Chat WhatsApp, ceritakan kebutuhan dan kisaran budget.</p></div>
+        <div class="tl-step"><div class="tl-dot">02</div><h3>Survey & Desain</h3><p>Tim datang survey lokasi, buat konsep dan gambar kerja.</p></div>
+        <div class="tl-step"><div class="tl-dot">03</div><h3>RAB & Penawaran</h3><p>Rincian biaya dan waktu pengerjaan disampaikan transparan.</p></div>
+        <div class="tl-step"><div class="tl-dot">04</div><h3>Pengerjaan</h3><p>Dikerjakan tim lapangan dengan pengawasan berkala.</p></div>
+        <div class="tl-step"><div class="tl-dot">05</div><h3>Serah Terima</h3><p>Quality check menyeluruh sebelum kunci diserahkan.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="estimasi">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div><div class="eyebrow" style="margin-bottom:10px">Estimasi Biaya</div><h2>Hitung kira-kira dulu di sini</h2></div>
+      <p>Masukkan luas dan tingkat finishing untuk lihat kisaran biaya — RAB detail tetap disusun setelah survey lokasi.</p>
+    </div>
+    <div class="est-card reveal">
+      <div>
+        <div class="est-field">
+          <label for="estType">Jenis Pekerjaan</label>
+          <select id="estType">
+            <option value="1500000" data-name="Renovasi Ringan">Renovasi Ringan — ± Rp1,5jt/m²</option>
+            <option value="3000000" data-name="Renovasi Total">Renovasi Total — ± Rp3jt/m²</option>
+            <option value="4500000" data-name="Pembangunan Baru">Pembangunan Baru — ± Rp4,5jt/m²</option>
+            <option value="800000" data-name="Desain Interior">Desain Interior — ± Rp800rb/m²</option>
+          </select>
+        </div>
+        <div class="est-field">
+          <label for="estLuas">Luas Area (m²)</label>
+          <input type="number" id="estLuas" value="60" min="1">
+        </div>
+        <div class="est-field">
+          <label>Tingkat Finishing</label>
+          <div class="est-radios">
+            <label><input type="radio" name="finishing" value="1" checked><span>Standar</span></label>
+            <label><input type="radio" name="finishing" value="1.3"><span>Menengah</span></label>
+            <label><input type="radio" name="finishing" value="1.7"><span>Premium</span></label>
+          </div>
+        </div>
+      </div>
+      <div class="est-result">
+        <div class="elabel">Estimasi Kisaran Biaya</div>
+        <div class="erange" id="estRange">Rp76,5jt – Rp103,5jt</div>
+        <div class="enote">Perkiraan awal, RAB final menyesuaikan hasil survey & spesifikasi material.</div>
+        <a class="btn" href="https://wa.me/6281234567890" id="estWaBtn" target="_blank">Konsultasi Estimasi Ini →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div><div class="eyebrow" style="margin-bottom:10px">Before / After</div><h2>Geser untuk lihat hasilnya</h2></div>
+    </div>
+    <div class="ba-wrap reveal">
+      <div class="ba-slider" id="baSlider">
+        <div class="ba-before"><span class="ba-label">SEBELUM</span></div>
+        <div class="ba-after" id="baAfter"><span class="ba-label">SESUDAH</span></div>
+        <div class="ba-handle" id="baHandle"></div>
+      </div>
+      <input type="range" class="ba-range" id="baRange" min="0" max="100" value="50">
+      <div class="ba-caption">
+        <h3>Renovasi Dapur — Rumah Type 45</h3>
+        <div class="spec-row">
+          <span>Luas: <b>18 m²</b></span>
+          <span>Durasi: <b>21 hari</b></span>
+          <span>Lokasi: <b>Cirebon</b></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="proyek">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div><div class="eyebrow" style="margin-bottom:10px">Proyek Terbaru</div><h2>Sebagian yang sudah kami kerjakan</h2></div>
+    </div>
+    <div class="proj-grid">
+      <div class="proj-card reveal">
+        <div class="proj-photo" style="background:linear-gradient(135deg,#2f5d50,#264d42)">🏠</div>
+        <div class="proj-body">
+          <h3>Renovasi Rumah Minimalis</h3>
+          <div class="proj-specs">
+            <span>Luas<b>90 m²</b></span>
+            <span>Durasi<b>35 hari</b></span>
+            <span>Lokasi<b>Cirebon</b></span>
+            <span>Tahun<b>2026</b></span>
+          </div>
+        </div>
+      </div>
+      <div class="proj-card reveal">
+        <div class="proj-photo" style="background:linear-gradient(135deg,#b5693f,#8f4f2c)">🍽️</div>
+        <div class="proj-body">
+          <h3>Kitchen & Dining Set</h3>
+          <div class="proj-specs">
+            <span>Luas<b>18 m²</b></span>
+            <span>Durasi<b>21 hari</b></span>
+            <span>Lokasi<b>Kuningan</b></span>
+            <span>Tahun<b>2025</b></span>
+          </div>
+        </div>
+      </div>
+      <div class="proj-card reveal">
+        <div class="proj-photo" style="background:linear-gradient(135deg,#3b5a7a,#2c4560)">🧱</div>
+        <div class="proj-body">
+          <h3>Fasad Rumah Modern</h3>
+          <div class="proj-specs">
+            <span>Luas<b>140 m²</b></span>
+            <span>Durasi<b>28 hari</b></span>
+            <span>Lokasi<b>Cirebon</b></span>
+            <span>Tahun<b>2025</b></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div><div class="eyebrow" style="margin-bottom:10px">Kenapa RuangKarya</div><h2>Kerja jelas, hasil terjaga</h2></div>
+    </div>
+    <div class="why-grid">
+      <div class="why-card reveal">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 3 7v6c0 5 4 8.5 9 9 5-.5 9-4 9-9V7l-9-5z"/><path d="m9 12 2 2 4-4"/></svg>
+        <h3>Garansi Pekerjaan</h3>
+        <p>Setiap pekerjaan struktur dan finishing bergaransi resmi.</p>
+      </div>
+      <div class="why-card reveal">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="6" height="6"/><path d="M4 9h1M4 15h1M19 9h1M19 15h1M9 4v1M15 4v1M9 19v1M15 19v1"/></svg>
+        <h3>Tim Berpengalaman</h3>
+        <p>Arsitek dan tukang terlatih dengan portofolio yang teruji.</p>
+      </div>
+      <div class="why-card reveal">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v4M15 3h4a2 2 0 0 1 2 2v4M9 21H5a2 2 0 0 1-2-2v-4M15 21h4a2 2 0 0 0 2-2v-4"/></svg>
+        <h3>Transparansi RAB</h3>
+        <p>Rincian biaya dijelaskan di depan, tanpa tambahan mendadak.</p>
+      </div>
+      <div class="why-card reveal">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+        <h3>Tepat Waktu</h3>
+        <p>Jadwal pengerjaan dipantau agar sesuai target penyelesaian.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div><div class="eyebrow" style="margin-bottom:10px">Area Layanan</div><h2>Melayani area berikut</h2></div>
+    </div>
+    <div class="area-chips reveal">
+      <span>Cirebon</span><span>Kuningan</span><span>Indramayu</span><span>Majalengka</span><span>Brebes</span><span>Sekitarnya (survey dulu)</span>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div><div class="eyebrow" style="margin-bottom:10px">Kata Klien</div><h2>Yang sudah pernah kerja sama</h2></div>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card reveal">
+        <div class="stars">★★★★★</div>
+        <p>RAB dijelaskan detail dari awal, ga ada biaya tambahan mendadak. Hasil renovasi dapur juga rapi.</p>
+        <div class="testi-who"><b>Bpk. Hendra</b><span>Renovasi Dapur</span></div>
+      </div>
+      <div class="testi-card reveal">
+        <div class="stars">★★★★★</div>
+        <p>Tim survey datang tepat waktu, progress dikabari rutin sampai rumah selesai dibangun.</p>
+        <div class="testi-who"><b>Ibu Ratna</b><span>Pembangunan Rumah</span></div>
+      </div>
+      <div class="testi-card reveal">
+        <div class="stars">★★★★★</div>
+        <p>Konsep interior ruang tamu jadi lebih fungsional, saran furniturnya juga pas dengan budget.</p>
+        <div class="testi-who"><b>Andi</b><span>Desain Interior</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="faq" style="padding-top:0">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div><div class="eyebrow" style="margin-bottom:10px">FAQ</div><h2>Pertanyaan umum</h2></div>
+    </div>
+    <div class="faq-list reveal">
+      <div class="faq-item">
+        <button class="faq-q">Apakah survey lokasi berbayar?<svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
+        <div class="faq-a"><p>Tidak, survey awal dan konsultasi kami gratiskan untuk area layanan yang tercantum di atas.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Berapa lama proses dari survey sampai mulai kerja?<svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
+        <div class="faq-a"><p>Biasanya 3–7 hari kerja untuk survey, desain, dan penawaran RAB sebelum mulai pengerjaan.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Apakah bisa bayar bertahap sesuai progress?<svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
+        <div class="faq-a"><p>Bisa, pembayaran dibagi per termin sesuai progress pekerjaan yang disepakati di awal.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Apakah material sudah termasuk dalam penawaran?<svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
+        <div class="faq-a"><p>Ya, RAB mencantumkan rincian material dan jasa secara terpisah agar transparan.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+    <div class="cta reveal">
+      <div>
+        <div class="eyebrow" style="color:#cfe0da">Punya Rencana Renovasi?</div>
+        <h2>Ceritakan kebutuhan Anda, kami arahkan langkah awalnya.</h2>
+        <p>Chat kebutuhan dan kisaran budget — tim kami bantu jadwalkan survey lokasi gratis.</p>
+        <div class="cta-row" style="margin-top:22px">
+          <a class="btn" href="https://wa.me/6281234567890">Chat WhatsApp →</a>
+          <a class="btn ghost" href="#estimasi">Cek Estimasi Dulu</a>
+        </div>
+      </div>
+      <div class="cta-info">
+        <div><b>Area Layanan</b>Cirebon & sekitarnya</div>
+        <div><b>Jam Operasional</b>Senin–Sabtu, 08.00–17.00</div>
+        <div><b>WhatsApp</b>0812-3456-7890</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-row">
+    <span>© 2026 RuangKarya — Renovasi, Bangunan & Interior</span>
+    <div class="foot-links">
+      <a href="https://wa.me/6281234567890">WhatsApp</a>
+      <a href="#layanan">Layanan</a>
+      <a href="#faq">FAQ</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+} else {
+  document.querySelectorAll('.reveal').forEach(el=>el.classList.add('in'));
+}
+
+/* kalkulator estimasi biaya */
+const estType = document.getElementById('estType');
+const estLuas = document.getElementById('estLuas');
+const estRange = document.getElementById('estRange');
+const estWaBtn = document.getElementById('estWaBtn');
+function formatJt(n){
+  const jt = n / 1000000;
+  return 'Rp' + (jt % 1 === 0 ? jt.toFixed(0) : jt.toFixed(1).replace('.', ',')) + 'jt';
+}
+function updateEstimator(){
+  const base = parseFloat(estType.value);
+  const luas = Math.max(1, parseFloat(estLuas.value) || 1);
+  const finishing = parseFloat(document.querySelector('input[name="finishing"]:checked').value);
+  const mid = base * luas * finishing;
+  const low = mid * 0.85, high = mid * 1.15;
+  estRange.textContent = `${formatJt(low)} – ${formatJt(high)}`;
+  const name = estType.options[estType.selectedIndex].dataset.name;
+  const finishLabel = document.querySelector('input[name="finishing"]:checked').nextElementSibling.textContent;
+  const msg = `Halo RuangKarya, saya mau konsultasi untuk ${name} seluas ${luas}m² dengan finishing ${finishLabel}. Estimasi yang saya lihat di web sekitar ${formatJt(low)}–${formatJt(high)}.`;
+  estWaBtn.href = 'https://wa.me/6281234567890?text=' + encodeURIComponent(msg);
+}
+[estType, estLuas].forEach(el => el.addEventListener('input', updateEstimator));
+document.querySelectorAll('input[name="finishing"]').forEach(el => el.addEventListener('change', updateEstimator));
+updateEstimator();
+
+/* before / after slider */
+const baRange = document.getElementById('baRange');
+const baAfter = document.getElementById('baAfter');
+const baHandle = document.getElementById('baHandle');
+function updateBa(){
+  const v = baRange.value;
+  baAfter.style.clipPath = `inset(0 0 0 ${v}%)`;
+  baHandle.style.left = v + '%';
+}
+baRange.addEventListener('input', updateBa);
+updateBa();
+
+/* accordion FAQ */
+document.querySelectorAll('.faq-item').forEach(item=>{
+  item.querySelector('.faq-q').addEventListener('click', ()=>{
+    const wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(o=>o.classList.remove('open'));
+    if(!wasOpen) item.classList.add('open');
+  });
+});
+</script>
+
+</body>
+</html>
